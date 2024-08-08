@@ -15,9 +15,36 @@
 ]]
 
 --[[
-    Description: A short description of the file.
+    Description: A core file to hold common functions for Anvil.
     Contributor: XDuskAshes
     Part of the Anvil toolkit for ComputerCraft. <https://github.com/XDuskAshes/anvil/>
 ]]
 
-local core = require("/src/anvilcore") -- Change as needed.
+--[[
+    VERY SPECIFIC DEVELOPER INSTRUCTIONS FOR THIS FILE!!!1!1!1!!!!!
+    ( These are mentioned in /resources/doc/anvilcore-instructions.txt )
+    
+    This file is to be modified only in these cases:
+
+    1. Rewrites or tweaks of functions that make them better.
+    2. New functions to improve the core.
+
+    Don't add things Anvil doesn't need.
+]]
+
+local core = {}
+
+core.anvilVer = 1.0
+
+-- Check if any item is empty, such as a variable.
+function core.isEmpty(item)
+    local itemType = type(item)
+
+    if itemType == "nil" then
+        return true
+    else
+        return false, itemType
+    end
+end
+
+return core

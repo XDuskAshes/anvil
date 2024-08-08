@@ -1,0 +1,8 @@
+Anvil Core file ( /src/anvilcore.lua ) special instructions
+
+The above mentioned file is to be modified only in these cases:
+
+1. Rewrites or tweaks of functions that make them better.
+2. New functions to improve the core.
+
+Don't add things Anvil doesn't need.
