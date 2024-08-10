@@ -34,7 +34,7 @@
 
 local core = {}
 
-core.anvilVer = 1.0
+core.anvilVer = "1.0a"
 
 -- Check if any item is empty, such as a variable.
 function core.isEmpty(item)
