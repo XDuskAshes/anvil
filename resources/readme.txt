@@ -1,0 +1,1 @@
+This directory contains resources, such as file templates and special notices for certain files.
