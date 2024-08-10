@@ -47,7 +47,7 @@ function ljson.dataFromFile(file,data)
         if not type(rawData) == "table" then
             return false
         else
-            return rawData[data] or false
+            return rawData[data] -- "Need check nil" - But it works? ~ Dusk, Aug. 2024
         end
     end
 end
