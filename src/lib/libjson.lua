@@ -32,7 +32,7 @@ function ljson.unserializeFromFile(file)
     elseif core.isEmpty(file) then
         return false
     end
-    
+
     local handle = fs.open(shell.resolve(file),"r")
     local data = textutils.unserialiseJSON(handle.readAll())
     handle.close()

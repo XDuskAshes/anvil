@@ -26,8 +26,13 @@ local anvilPauses = {}
 
 -- Wait for any keypress before continuing.
 -- No parameters.
-function anvilPauses.waitForAny()
-    print("Press any key to continue...")
+function anvilPauses.waitForAny(prompt)
+    if core.isEmpty(prompt) then
+        print("Press any key to continue...")
+    else
+        print(prompt)
+    end
+
     while true do
         local event = {os.pullEvent()}
 
@@ -62,10 +67,11 @@ end
 -- Returns true or false.
 function anvilPauses.promptYesOrNo(prompt)
     if core.isEmpty(prompt) then
-        return false
+        write("[Y/N]: ")
+    else
+        write(prompt.." [Y/N]: ")
     end
 
-    write(prompt.." [Y/N]: ")
     while true do
         local event = {os.pullEvent()}
     
@@ -78,6 +84,18 @@ function anvilPauses.promptYesOrNo(prompt)
                 return false
             end
         end
+    end
+end
+
+-- Just a prompt for up to 30 seconds. Glorified and slightly neutered "sleep()".
+-- One parameter, an amount of seconds up to 30.
+function anvilPauses.pauseFor(seconds)
+    if seconds > 30 then
+        print("Waiting for 30 seconds...")
+        sleep(30)
+    else
+        print("Waiting for "..seconds.." seconds...")
+        sleep(seconds)
     end
 end
 
