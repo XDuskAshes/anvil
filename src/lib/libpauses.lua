@@ -41,6 +41,10 @@ end
 -- Only parameter is "whatKey", being the key to wait for.
 -- Any key under "keys" is fair game, like keys.space
 function anvilPauses.waitForKey(whatKey)
+    if core.isEmpty(whatKey) then
+        return false
+    end
+
     local keyName = keys.getName(whatKey)
 
     print("Press "..keyName.." to continue...")
@@ -57,6 +61,10 @@ end
 -- Only parameter is "prompt", being what text to display.
 -- Returns true or false.
 function anvilPauses.promptYesOrNo(prompt)
+    if core.isEmpty(prompt) then
+        return false
+    end
+
     write(prompt.." [Y/N]: ")
     while true do
         local event = {os.pullEvent()}

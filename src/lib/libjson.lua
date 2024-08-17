@@ -29,12 +29,14 @@ local ljson = {}
 function ljson.unserializeFromFile(file)
     if not fs.exists(shell.resolve(file)) then
         return false
-    else
-        local handle = fs.open(shell.resolve(file),"r")
-        local data = textutils.unserialiseJSON(handle.readAll())
-        handle.close()
-        return data
+    elseif core.isEmpty(file) then
+        return false
     end
+    
+    local handle = fs.open(shell.resolve(file),"r")
+    local data = textutils.unserialiseJSON(handle.readAll())
+    handle.close()
+    return data
 end
 
 -- Opens a JSON file and returns a specific data point.
@@ -42,14 +44,16 @@ end
 function ljson.dataFromFile(file,data)
     if not fs.exists(shell.resolve(file)) then
         return false
-    else
-        local rawData = ljson.unserializeFromFile(file) -- Using functions in the file for clarity and code repetition reduction. ~ Dusk, Aug. 2024
-        if not type(rawData) == "table" then
-            return false
-        else
-            return rawData[data] -- "Need check nil" - But it works? ~ Dusk, Aug. 2024
-        end
+    elseif core.isEmpty(file) or core.isEmpty(data) then
+        return false
     end
+
+    local rawData = ljson.unserializeFromFile(file) -- Using functions in the file for clarity and code repetition reduction. ~ Dusk, Aug. 2024
+    if not type(rawData) == "table" then
+        return false
+    end
+    
+    return rawData[data] -- "Need check nil" - But it works? ~ Dusk, Aug. 2024
 end
 
 return ljson
