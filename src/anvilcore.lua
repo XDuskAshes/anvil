@@ -37,6 +37,9 @@ local core = {}
 core.anvilVer = "1.0a"
 
 -- Check if any item is empty, such as a variable.
+-- @param item any The thing to check for emptiness.
+-- @return boolean If 'item' is empty or not.
+-- @return any The type of 'item' if not empty.
 function core.isEmpty(item)
     local itemType = type(item)
 
@@ -45,6 +48,24 @@ function core.isEmpty(item)
     else
         return false, itemType
     end
+end
+
+-- xpcall() wrapper. Because safely calling functions is cool.
+-- @param func function What function to call.
+-- @param args table (optional) Table of args to pass to the function.
+-- @return boolean True if success, false if error.
+-- @return any Returns the output of the function or the error message.
+function core.safeCall(func,args)
+    if not type(func) == "function" then
+        return false, "[anvil]: cannot safeCall "..func..": not a function"
+    end
+
+    local function errorHandle(errormsg)
+        return false, "[anvil]: exec error: "..errormsg
+    end
+
+    local status, result = xpcall(function() return func(table.unpack(args or {})) end, errorHandle)
+    return status, result
 end
 
 return core
