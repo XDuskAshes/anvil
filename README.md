@@ -1,3 +1,3 @@
 # Anvil
 
-A to-be toolkit of utilities for building things within ComputerCraft's CraftOS.
+A to-be modular toolkit of utilities for building things within ComputerCraft's CraftOS.
